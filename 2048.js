@@ -124,7 +124,6 @@ function getNewNum(){
     return 2;
 }
 function moveDir(opt){//
-    switch(opt){
         case 0: move(); break;//up
         case 1: rotate(2); move(); rotate(2); break;//down
         case 2: rotate(1); move(); rotate(3); break;//left
