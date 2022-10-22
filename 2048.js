@@ -124,6 +124,7 @@ function getNewNum(){
     return 2;
 }
 function moveDir(opt){//
+    switch(opt){
         case 0: move(); break;//up
         case 1: rotate(2); move(); rotate(2); break;//down
         case 2: rotate(1); move(); rotate(3); break;//left
@@ -154,15 +155,15 @@ function move(){
             if(board[i][j]==0) continue;//보드가 빈자리면 넘어가기
             var tempY = i-1;
             while(tempY>0 && board[tempY][j]==0) tempY--;//i축에서 0이 아닌 칸이 나올때까지 값에 -1
-            if(board[tempY][j]==0){//해당 축이 모드 0인경우
-                board[tempY][j]=board[i][j];//해당 칸의 값을 축의 가장 아래로
-                board[i][j]=0;//해당 칸의 값을 0으로
+            if(board[tempY][j]==0){//해당칸이 0인경우 == 해당 축이 모두 0인경우
+                board[tempY][j]=board[i][j];//목표칸의 값을 해당칸의 값으로 변경
+                board[i][j]=0;//목표칸의 값을 0으로
                 isMove=true;
             }
-            else if(board[tempY][j]!=board[i][j]){
+            else if(board[tempY][j]!=board[i][j]){//목표칸이 해당칸과 같은값이 아닌경우
                 if(tempY+1==i) continue;
-                board[tempY][j]=board[i][j];
-                board[i][j]=0;
+                board[tempY+1][j]=board[i][j];//해당칸의 윗칸값을 목표칸값으로 한다.
+                board[i][j]=0;//목표칸의 값을 0으로
                 isMove=true;
             }
             else{
