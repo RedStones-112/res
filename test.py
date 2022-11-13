@@ -6,15 +6,17 @@ from gtts import gTTS
 import playsound
 import pygame
 import time
-def speak(text):
+def speak(text,name):
     tts = gTTS(text=text, lang='ko')
-    tts.save("gTTSko.mp3")
-    
+    tts.save(name)
+    playsound.playsound(name)
+    '''
     pygame.mixer.init()
-    pygame.mixer.music.load("gTTSko.mp3")
+    pygame.mixer.music.load(name)
     pygame.mixer.music.play()
+'''
 
 
     
-speak("네 듣고있어요")
-time.sleep(2)
+speak("네 듣고있어요","gTTSko.mp3")
+time.sleep(1)
