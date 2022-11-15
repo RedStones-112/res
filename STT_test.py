@@ -1,10 +1,10 @@
 import speech_recognition as sr
 import os
-import subprocess
 import sounddevice as sd
 import numpy as np
 from gtts import gTTS
 import pygame
+import webbrowser
 def speak(text, name):
     tts = gTTS(text=text, lang='ko')
     tts.save(name)
@@ -33,6 +33,9 @@ def get_speech():
         text = recognizer.recognize_google(result, language='ko')
         
     return text
+def open_URL(URL):
+    webbrowser.get().open(URL)
+
 duration = -1  # seconds
 
 while True:
@@ -53,11 +56,11 @@ while True:
                 if text == "꺼 줘":
                     speak("컴퓨터를 종료합니다", "turnOff.mp3")
                     os.system("shutdown -s -f")
-                elif text== "마듀 켜 줘":
-                    speak("프로그램을 실행합니다.", "programStart.mp3")
+                elif text== "음악":
+                    speak("음악리스트를 재생합니다", "programStart.mp3")
+                    open_URL("https://www.youtube.com/watch?v=t7MBzMP4OzY&list=PLw_rE4_LEUznWdORlUzK8PICNa-jd8Ly4&index=1")
             except:
                 speak("소리가 감지되지 않았습니다", "noSound.mp3")
-                print("소리가 감지되지 않았습니다.")
     with sd.Stream(callback=print_sound):
         sd.sleep(duration)
 # microphone에서 auido source를 생성합니다
