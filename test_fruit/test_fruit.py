@@ -53,8 +53,7 @@ def k_mean(n, k, target_points, Apple, Banana, Grape):
         range1 = sum(np.power(abs(target_points[:,0]-old_target[:,0]),2))**0.5
         range2 = sum(np.power(abs(target_points[:,1]-old_target[:,1]),2))**0.5
         range3 = sum(np.power(abs(target_points[:,2]-old_target[:,2]),2))**0.5
-        
-        if range1 + range2 + range3 <= 5:#전단계의 중점과의 거리총합값이 5이하면 종료 
+        if abs(range1) + abs(range2) + abs(range3) <= 5:#전단계의 중점과의 거리총합값이 5이하면 종료 
             return target_points
         
 
@@ -110,19 +109,18 @@ def main():
         Class_num = Get_range(target_points, Query_data[:,i])
         if Class_num == 0:
             Class_1 = np.append(Class_1, Query_data[:,i:i+1], axis=1)
-            print(Query_data[:,i])
         elif Class_num == 1:
             Class_2 = np.append(Class_2, Query_data[:,i:i+1], axis=1)
         else:
             Class_3 = np.append(Class_3, Query_data[:,i:i+1], axis=1)
-
-
+    
+    
     
     fig = plt.figure(figsize=(6, 6))#확인용 파란점 = 중점3개
     ax = fig.add_subplot(111, projection='3d')
-    ax.scatter(Class_1[:,0], Class_1[:,1], Class_1[:,2], c='red', marker='o', s=15)
-    ax.scatter(Class_2[:,0], Class_2[:,1], Class_2[:,2], c='yellow', marker='o', s=15)
-    ax.scatter(Class_3[:,0], Class_3[:,1], Class_3[:,2], c='green', marker='o', s=15)
+    ax.scatter(Class_1[0,:], Class_1[1,:], Class_1[2,:], c='red', marker='o', s=15)
+    ax.scatter(Class_2[0,:], Class_2[1,:], Class_2[2,:], c='yellow', marker='o', s=15)
+    ax.scatter(Class_3[0,:], Class_3[1,:], Class_3[2,:], c='green', marker='o', s=15)
     ax.scatter(target_points[0,:], target_points[1,:], target_points[2,:], c='blue', marker='o', s=15)
     plt.show()
 
